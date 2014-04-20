@@ -4,7 +4,9 @@ version 1.1
  */
 
 package javagame;
-
+import java.awt.*;
+import javax.swing.ImageIcon;
+        
 /**
  *
  * @author engoza
@@ -16,6 +18,7 @@ public class JavaGame {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Tablero tablero= new Tablero();
     }
     
 }
