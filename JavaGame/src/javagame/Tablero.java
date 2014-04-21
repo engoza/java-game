@@ -6,57 +6,63 @@
 
 package javagame;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
-
-public class Tablero extends Canvas{
-            // TODO code application logic here
-    private Frame ventana;
-    private Sprite caracol, zombie;
-    long tiempo=System.currentTimeMillis();
- 
-    public Tablero(){
-        caracol=new Sprite();
-        zombie=new Sprite();
- 
-        ventana=new Frame();
- 
-        ventana.setSize(550,500);
-        ventana.add(this);
-        ventana.setVisible(true);
-        ventana.addWindowListener(new WindowAdapter(){
-            public void windowClosing(WindowEvent e){
-                    System.exit(0);
-                }
-        });
- 
-        caracol.setSprite("/imagenes/caracol.png");
-        zombie.setSprite("/imagenes/zombie.png");
-        while(true)
-        {         
-            if (System.currentTimeMillis()-tiempo>25) { // actualizamos cada 25 milisegundos
- 
-                if (caracol.getX()>this.getWidth()) caracol.setX(0);
-                else caracol.setX(caracol.getX()+1);
- 
-                dibuja(this.getGraphics());
-                tiempo=System.currentTimeMillis();
-            }
-        }
+/**
+ *
+ * @author engoza
+ */
+public class Tablero {
+    
+    protected int anchuraCasilla;
+    protected int ancho;
+    protected int alto;
+    public ArrayList<Casilla> tablero;
+    protected boolean debug=false;
+    
+    public Tablero(int ancho, int alto){
+    this.ancho=ancho;
+    this.alto=alto;
+    tablero= new ArrayList();
+    int i;
+    for (i=1;i<=alto*ancho;i++){
+        int x=i%ancho; if (x==0) x=ancho;
+        int y=1+i/ancho; if (i%ancho==0) y=y-1;
+    Casilla casilla=new Casilla(x,y,1);
+    if (debug) {System.out.println("index "+ i +" x=" + x + " y=" + y );}
+    tablero.add(i-1, casilla);
     }
- 
-    public void dibuja(Graphics grafico)
-    {
-        // El Begin de OpenGL o DirectX
-        BufferedImage pantalla=new BufferedImage(this.getWidth(),this.getHeight(), BufferedImage.TYPE_INT_RGB );
- 
-        caracol.putSprite(pantalla.getGraphics(), caracol.getX(), caracol.getY());
-        zombie.putSprite(pantalla.getGraphics(), 110, 100);
- 
-        // El ENd
-        grafico.drawImage(pantalla, 0, 0, this);
     }
 
+       public int getAnchuraCasilla() {
+        return anchuraCasilla;
+    }
+
+    public void setAnchuraCasilla(int anchuraCasilla) {
+        this.anchuraCasilla = anchuraCasilla;
+    }
+    
+    public int getAncho() {
+        return ancho;
+    }
+
+    public void setAncho(int ancho) {
+        this.ancho = ancho;
+    }
+
+    public int getAlto() {
+        return alto;
+    }
+
+    public void setAlto(int alto) {
+        this.alto = alto;
+    }
+
+    public ArrayList<Casilla> getTablero() {
+        return tablero;
+    }
+
+    public void dibujarTablero(){
+    }
+    
 }
