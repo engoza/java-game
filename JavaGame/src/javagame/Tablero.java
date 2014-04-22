@@ -6,19 +6,23 @@
 
 package javagame;
 
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 /**
  *
  * @author engoza
  */
-public class Tablero {
+public class Tablero extends Canvas{
     
     protected int anchuraCasilla;
     protected int ancho;
     protected int alto;
     public ArrayList<Casilla> tablero;
     protected boolean debug=false;
+    private Frame ventana;
     
     public Tablero(int ancho, int alto){
     this.ancho=ancho;
@@ -32,6 +36,17 @@ public class Tablero {
     if (debug) {System.out.println("index "+ i +" x=" + x + " y=" + y );}
     tablero.add(i-1, casilla);
     }
+    
+        ventana=new Frame();
+ 
+        ventana.setSize(800,600);
+        ventana.add(this);
+        ventana.setVisible(true);
+        ventana.addWindowListener(new WindowAdapter(){
+            public void windowClosing(WindowEvent e){
+                    System.exit(0);
+                }
+        });
     }
 
        public int getAnchuraCasilla() {
