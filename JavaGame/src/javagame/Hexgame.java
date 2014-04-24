@@ -39,57 +39,34 @@ public class Hexgame
 	final static Color COLOURTWO = new Color(0,0,0,200);
 	final static Color COLOURTWOTXT = new Color(255,100,255);
         final static Color[] COLORES= {Color.YELLOW,Color.GREEN,Color.BLUE, new Color(139,69,19)};
-	final static int EMPTY = 0;
-	final static int BSIZE = 5; //board size.
-	final static int HEXSIZE = 60;	//hex size in pixels
-	final static int BORDERS = 15;  
-	final static int SCRSIZE = HEXSIZE * (BSIZE + 1) + BORDERS*3; //screen size (vertical dimension).
- 
-	int[][] board = new int[BSIZE][BSIZE];
+        
+        //parametros
+        int EMPTY = 0;
+	int BSIZE = 5; //board size.
+	int HEXSIZE = 60;	//hex size in pixels
+	int BORDERS = 15;  
+	int SCRSIZE = HEXSIZE * (BSIZE + 1) + BORDERS*3; //screen size (vertical dimension).
+	
+	int[][] board;
  
 	void initGame(){
  
+            
+        
+ 
+                Nivel nivel=cargarNivel(1);
+                
 		Hexmech.setXYasVertex(false); //RECOMMENDED: leave this as FALSE.
  
-		Hexmech.setHeight(HEXSIZE); //Either setHeight or setSize must be run to initialize the hex
-		Hexmech.setBorders(BORDERS);
- 
-		for (int i=0;i<BSIZE;i++) {
-			for (int j=0;j<BSIZE;j++) {
-				board[i][j]=EMPTY;
-			}
-		}
+		Hexmech.setHeight(nivel.HEXSIZE); //Either setHeight or setSize must be run to initialize the hex
+		Hexmech.setBorders(nivel.BORDERS);
+                this.BSIZE=nivel.BSIZE;
+                this.SCRSIZE=nivel.SCRSIZE;
                 
-                board[0][0]=1;
-                board[0][1]=1;
-                board[0][2]=1;
-                board[0][3]=1;
-                board[0][4]=1;
+		this.board=nivel.board;
                 
-                board[1][0]=1;
-                board[1][1]=1;
-                board[1][2]=1;
-                board[1][3]=1;
-                board[1][4]=1;
-             
-                board[2][0]=2;
-                board[2][1]=2;
-                board[2][2]=3;
-                board[2][3]=2;
-                board[2][4]=2;
-              
-                board[3][0]=1;
-                board[3][1]=1;
-                board[3][2]=1;
-                board[3][3]=1;
-                board[3][4]=1;
                 
-                board[4][0]=1;
-                board[4][1]=1;
-                board[4][2]=1;
-                board[4][3]=1;
-                board[4][4]=1;
-   
+                
 	}
  
 	private void createAndShowGUI()
@@ -110,6 +87,12 @@ public class Hexgame
                 
                 
 	}
+
+    private Nivel cargarNivel(int i) {
+      
+      Nivel nivel=new Nivel(i);
+      return nivel;           
+    }
  
  
 	class DrawingPanel extends JPanel
