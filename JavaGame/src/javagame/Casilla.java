@@ -12,16 +12,14 @@ package javagame;
  */
 class Casilla {
     
-    protected int coordenadaX;
-    protected int coordenadaY;
     protected int tipoCasilla;
+    protected boolean seleccionada;
     protected Unidad unidad;
     
     public Casilla(){}
     
-    public Casilla(int x, int y, int tipo){
-        this.coordenadaX=x;
-        this.coordenadaY=y;
+    public Casilla(int tipo){
         this.tipoCasilla=tipo;
+        this.seleccionada=false;
     }
 }
